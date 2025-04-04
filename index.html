@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda Virtual</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .producto {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      transition: transform 0.2s ease;
+    }
+    .producto:hover {
+      transform: scale(1.02);
+    }
+    .producto img {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-5">
+    <h1 class="text-center mb-4">Tienda Virtual</h1>
+    <div class="row" id="lista-productos">
+      <!-- Productos se insertan aquí -->
+    </div>
+    <div class="text-center mt-4">
+      <button class="btn btn-success" onclick="enviarPedidoWhatsApp()">Finalizar compra vía WhatsApp</button>
+    </div>
+  </div>
+
+  <script>
+    const productos = [
+      { id: 1, nombre: "Producto 1", precio: 20, imagen: "https://via.placeholder.com/300x200?text=Producto+1" },
+      { id: 2, nombre: "Producto 2", precio: 25, imagen: "https://via.placeholder.com/300x200?text=Producto+2" },
+      { id: 3, nombre: "Producto 3", precio: 30, imagen: "https://via.placeholder.com/300x200?text=Producto+3" },
+      { id: 4, nombre: "Producto 4", precio: 15, imagen: "https://via.placeholder.com/300x200?text=Producto+4" },
+      { id: 5, nombre: "Producto 5", precio: 18, imagen: "https://via.placeholder.com/300x200?text=Producto+5" },
+      { id: 6, nombre: "Producto 6", precio: 22, imagen: "https://via.placeholder.com/300x200?text=Producto+6" },
+      { id: 7, nombre: "Producto 7", precio: 35, imagen: "https://via.placeholder.com/300x200?text=Producto+7" },
+      { id: 8, nombre: "Producto 8", precio: 28, imagen: "https://via.placeholder.com/300x200?text=Producto+8" },
+      { id: 9, nombre: "Producto 9", precio: 17, imagen: "https://via.placeholder.com/300x200?text=Producto+9" },
+      { id: 10, nombre: "Producto 10", precio: 19, imagen: "https://via.placeholder.com/300x200?text=Producto+10" },
+    ];
+
+    let carrito = {};
+
+    const lista = document.getElementById("lista-productos");
+    productos.forEach(producto => {
+      const col = document.createElement("div");
+      col.className = "col-md-4 mb-4";
+
+      col.innerHTML = `
+        <div class="card producto">
+          <img src="${producto.imagen}" class="card-img-top" alt="${producto.nombre}">
+          <div class="card-body">
+            <h5 class="card-title">${producto.nombre}</h5>
+            <p class="card-text">Precio: S/. ${producto.precio}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <input type="number" min="1" value="1" class="form-control w-50 me-2" id="cantidad-${producto.id}">
+              <button class="btn btn-primary" onclick="agregarCarrito(${producto.id})">Agregar</button>
+            </div>
+          </div>
+        </div>`;
+
+      lista.appendChild(col);
+    });
+
+    function agregarCarrito(id) {
+      const cantidad = parseInt(document.getElementById(`cantidad-${id}`).value);
+      if (carrito[id]) {
+        carrito[id] += cantidad;
+      } else {
+        carrito[id] = cantidad;
+      }
+
+      Swal.fire({
+        icon: 'success',
+        title: '¡Producto agregado!',
+        text: `Has agregado ${cantidad} unidades del producto.`,
+        timer: 1500,
+        showConfirmButton: false
+      });
+    }
+
+    function enviarPedidoWhatsApp() {
+      if (Object.keys(carrito).length === 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Carrito vacío',
+          text: 'Agrega productos antes de realizar la compra.'
+        });
+        return;
+      }
+
+      let mensaje = "Hola, deseo comprar los siguientes productos:%0A";
+      let total = 0;
+
+      for (let id in carrito) {
+        const producto = productos.find(p => p.id == id);
+        const cantidad = carrito[id];
+        mensaje += `- ${producto.nombre} (x${cantidad}) - S/. ${producto.precio * cantidad}%0A`;
+        total += producto.precio * cantidad;
+      }
+
+      mensaje += `%0ATotal: S/. ${total}`;
+
+      const telefono = "51958279027"; // Reemplazar con número real
+      const url = `https://wa.me/${telefono}?text=${mensaje}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
