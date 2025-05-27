@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Delicias Fungibles</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2913/2913109.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #d9bd8f;
+            --secondary: #5a3e2a;
+            --light: #f8f1e5;
+            --dark: #2c2118;
+            --accent: #8b5a2b;
+            --text: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        @font-face {
+            font-family: 'Poppins';
+            src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #e8d1a8 100%);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            color: var(--secondary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-item {
+            margin-left: 25px;
+        }
+        
+        .nav-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+            background-color: var(--accent);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .cart-icon {
+            position: relative;
+            margin-left: 25px;
+            color: var(--secondary);
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent);
+            color: white;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Hero Contacto */
+        .contact-hero {
+            height: 300px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd') center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .contact-hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        /* Sección de Contacto */
+        .contact-section {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            color: var(--secondary);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .info-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .info-card h3 {
+            color: var(--secondary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+        
+        .contact-text h4 {
+            color: var(--secondary);
+            margin-bottom: 5px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(139, 90, 43, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-container {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo-img {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .footer-logo-text {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+        
+        .footer-social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .footer-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social-link:hover {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+        
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-link-item {
+            margin-bottom: 10px;
+        }
+        
+        .footer-link {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+        
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .footer-contact-item i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Mensaje de confirmación */
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--primary);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: all 0.5s ease;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-hero {
+                height: 250px;
+            }
+            
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .btn {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="images/primer logo.png" alt="Logo Andean Fungus" class="logo-img-real" width="200px" height="80px">
+            </a>            
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="index.html" class="nav-link active">Inicio</a></li>
+            <!-- <li class="nav-item"><a href="productos.html" class="nav-link">Productos</a></li> -->
+                <li class="nav-item"><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+                <li class="nav-item"><a href="contacto.html" class="nav-link">Contacto</a></li>
+                <li class="nav-item">
+                    <div class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+    
+    <!-- Hero Contacto -->
+    <section class="contact-hero">
+        <div class="contact-hero-content">
+            <h1>Contáctanos</h1>
+            <p>Estamos aquí para responder tus preguntas y escuchar tus sugerencias</p>
+        </div>
+    </section>
+    
+    <!-- Sección de Contacto -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿CÓMO PODEMOS AYUDARTE?</h2>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h3>Información de contacto</h3>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Dirección</h4>
+                                <p>Av. Los Hongos 123, Lima, Perú</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Teléfono</h4>
+                                <p>+51 987 654 321</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <p>info@andeanfungus.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>Horario de atención</h4>
+                                <p>Lunes a Viernes: 9am - 6pm</p>
+                                <p>Sábados: 9am - 1pm</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3>Redes sociales</h3>
+                        <p>Síguenos en nuestras redes para conocer las últimas novedades y promociones.</p>
+                        
+                        <div style="display: flex; gap: 15px; margin-top: 20px;">
+                            <a href="#" style="color: var(--secondary); font-size: 1.5rem;"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" style="color: var(--secondary); font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                            <a href="#" style="color: var(--secondary); font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                            <a href="#" style="color: var(--secondary); font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.966575418673!2d-77.0429459241641!3d-12.04699094099003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c5f619ee3ec7%3A0x14206cb9cc452e4a!2sLima%2C%20Peru!5e0!3m2!1sen!2sus!4v1623251234567!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Teléfono (opcional)</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Asunto</label>
+                            <select id="subject" class="form-control" required>
+                                <option value="" disabled selected>Selecciona un asunto</option>
+                                <option value="consulta">Consulta general</option>
+                                <option value="pedido">Información sobre pedidos</option>
+                                <option value="distribuidor">Quiero ser distribuidor</option>
+                                <option value="trabajo">Oportunidades de trabajo</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Enviar mensaje</button>
+                        
+                        <div id="successMessage" class="success-message">
+                            ¡Gracias por contactarnos! Hemos recibido tu mensaje y te responderemos pronto.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <div class="footer-logo-img">DF</div>
+                        <div class="footer-logo-text">Delicias Fungibles</div>
+                    </div>
+                    <p>Somos una empresa dedicada a la producción de alimentos orgánicos y saludables, comprometidos con tu bienestar y el medio ambiente.</p>
+                    <div class="footer-social-links">
+                        <a href="#" class="footer-social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="footer-social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Enlaces rápidos</h3>
+                    <ul class="footer-links">
+                        <li class="footer-link-item"><a href="index.html" class="footer-link">Inicio</a></li>
+                        <li class="footer-link-item"><a href="productos.html" class="footer-link">Productos</a></li>
+                        <li class="footer-link-item"><a href="nosotros.html" class="footer-link">Nosotros</a></li>
+                        <li class="footer-link-item"><a href="contacto.html" class="footer-link">Contacto</a></li>
+                        <li class="footer-link-item"><a href="#" class="footer-link">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-title">Contacto</h3>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Av. Los Hongos 123, Lima, Perú</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>+51 987 654 321</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@deliciasfungibles.com</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Lun-Vie: 9am - 6pm</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Delicias Fungibles. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Menu móvil
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Formulario de contacto
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Aquí iría la lógica para enviar el formulario a un backend
+            // Por ahora simulamos el envío exitoso
+            
+            // Mostrar mensaje de éxito
+            successMessage.style.display = 'block';
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+            
+            // Resetear formulario
+            contactForm.reset();
+            
+            // Aquí puedes añadir AJAX o Fetch para enviar los datos a tu backend
+            // Ejemplo con Fetch:
+            /*
+            const formData = new FormData(contactForm);
+            
+            fetch('tu-backend/contacto.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    successMessage.style.display = 'block';
+                    contactForm.reset();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+            */
+        });
+        
+        // Detectar página actual y marcar enlace activo
+        function setActiveLink() {
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href');
+                if (linkPage === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+        
+        // Ejecutar al cargar la página
+        document.addEventListener('DOMContentLoaded', setActiveLink);
+    </script>
+</body>
+</html>
